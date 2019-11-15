@@ -42,5 +42,5 @@ void simplex::displayCurrent() {
 		cout << endl;
 	}
 
-	cout << "" << endl;
+	cout << endl;
 }
