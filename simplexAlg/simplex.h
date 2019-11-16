@@ -15,11 +15,12 @@ class simplex
 
 	public:
 		simplex(vector<vector<double>> a, vector<double> b, vector<double> c);
+		void runSimplexAlg();
 		bool isOptimum();
 		bool doSimplexCalc();
-		void runSimplexAlg();
 		int findPivotColumn();
 		int findSmallestB(int pivotColumn);
+		void doRowOperations(int pivotColumn, int pivotRow);
 		void displayCurrent();
 		void findMax();
 };
