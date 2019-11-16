@@ -26,13 +26,70 @@ simplex::simplex(vector<vector<double>> a, vector<double> b, vector<double> c) {
 	for (int i = 0; i < c.size(); i++) {
 		C.push_back(c[i]);
 	}
-
 }
 
 void simplex::runSimplexAlg() {
-	bool run = false;
+	bool run = isOptimum();
 
+	do{
+		bool solution = doSimplexCalc();
+		if (solution) {
+			break;
+		}
+	} while (!run);
+	
 }
+
+bool simplex::isOptimum() {
+	for (int i = 0; i < C.size(); i++) {
+		if (C[i] > 0) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool simplex::doSimplexCalc() {
+	if (isOptimum()) {
+		return true;
+	}
+
+	int pivotColumn = findPivotColumn();
+	int pivotRow = findSmallestB(pivotColumn);
+	doRowOperations(pivotColumn, pivotRow);
+
+	return false;
+}
+
+int simplex::findPivotColumn() {
+	int max = -9999999;
+	int index = 0;
+
+	for (int i = 0; i < C.size(); i++) {
+		if (C[i] >= max) {
+			max = C[i];
+			index = i;
+		}
+	}
+	return index;
+}
+
+int simplex::findSmallestB(int pivotColumn) {
+	double min = 9999999;
+	int index = 0;
+
+	for (int i = 0; i < B.size(); i++){
+		if (B[i] / A[i][pivotColumn] < min) {
+			min = (B[i] / A[i][pivotColumn]);
+			index = i;
+		}
+	}
+
+	return index;
+}
+
+
 
 void simplex::displayCurrent() {
 	for (int i = 0; i < rows; i++) {
