@@ -6,14 +6,14 @@ using namespace std;
 class simplex
 {
 	private:
-		int rows;
-		int columns;
 		vector<vector<double>> A;
 		vector<double> B;
 		vector<double> C;
-		double max;
+		double maxZ;
 
 	public:
+		int rows;
+		int columns;
 		simplex(vector<vector<double>> a, vector<double> b, vector<double> c);
 		void runSimplexAlg();
 		bool isOptimum();
