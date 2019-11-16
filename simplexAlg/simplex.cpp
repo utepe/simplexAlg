@@ -5,9 +5,10 @@
 
 using namespace std;
 
-
 simplex::simplex(vector<vector<double>> a, vector<double> b, vector<double> c) {
-	max = 0;
+	maxZ = 0;
+	columns = a[0].size();
+	rows = a.size();
 
 	//initialize A vector
 	A.resize(rows, vector<double>(columns, 0));
@@ -89,7 +90,52 @@ int simplex::findSmallestB(int pivotColumn) {
 	return index;
 }
 
+void simplex::doRowOperations(int pivotColumn, int pivotRow) {
+	double pivotMultiplier = A[pivotRow][pivotColumn];
 
+	maxZ -= (C[pivotColumn] * (B[pivotRow] / pivotMultiplier));
+	double pivotRowValues[columns];
+	double pivotColumnValues[rows];
+	double newRow[columns];
+
+	for (int i = 0; i < columns; i++) {
+		pivotRowValues[i] = A[pivotRow][i];
+	}
+	for (int i = 0; i < rows; i++) {
+		pivotColumnValues[i] = A[i][pivotColumn];
+	}
+	for (int i = 0; i < rows; i++) {
+		newRow = pivotRowValues[i] / pivotMultiplier;
+	}
+
+	B[pivotRow] /= pivotMultiplier;
+
+	for (int i = 0; i < rows; i++){
+		if (i != pivotRow) {
+			for (int j = 0; j < columns; j++) {
+				float multiplier = pivotColumnValues[i];
+				A[i][j] -= (multiplier * newRow[j]);
+			}
+		}
+	}
+	for (int i = 0; i < B.size(); i++) {
+		if (i != pivotRow) {
+			float multiplier= pivotColumnValues[i];
+			B[i] -= (multiplier * B[pivotRow]);
+		}
+	}
+
+	float multiplier = C[pivotColumn];
+	for (int i = 0; i < C.size(); i++) {
+		C[i] -= (multiplier * newRow[i]);
+
+	}
+
+	for (int i = 0; i < columns; i++) {
+		A[pivotRow][i] = newRow[i];
+	}
+
+}
 
 void simplex::displayCurrent() {
 	for (int i = 0; i < rows; i++) {
