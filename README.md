@@ -1,4 +1,4 @@
 # simplexAlg
-Simplex Algorithm (Constrainted Optimization)
-This is an algorthim I made which solves constrainted optimization questions using the Simplex Method
+Simplex Algorithm (Constrained Optimization)
+This is an algorthim I made which solves constrained optimization questions using the Simplex Method
 
