@@ -18,13 +18,13 @@ int main() {
 	};
 
 	//array of constaint coefficients
-	double B[] = { 5, 3, 4, 1, 2 };
+	double B[5] = {5, 3, 4, 1, 2};
 
 	//array of constraints of the objective function
 	double C[] = { 15, 6, 25, 0, 0, 0, 0, 0 };
 
 	vector<vector<double>> vecA(rowSize, vector<double>(columnSize, 0));
-	vector<double> vecB(columnSize);
+	vector<double> vecB(rowSize);
 	vector<double> vecC(columnSize);
 
 	//store A as vector to be able to pass to class
@@ -44,7 +44,7 @@ int main() {
 		vecC[i] = C[i];
 	}
 
-	simplex simplex(vecA, vecB, vecC);
+	simplex simplex(vecA, vecB, vecC, 3);
 	simplex.runSimplexAlg();
 
 }

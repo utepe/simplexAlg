@@ -10,11 +10,12 @@ class simplex
 		vector<double> B;
 		vector<double> C;
 		double maxZ;
+		int numOfVariables;
 
 	public:
 		int rows;
 		int columns;
-		simplex(vector<vector<double>> a, vector<double> b, vector<double> c);
+		simplex(vector<vector<double>> a, vector<double> b, vector<double> c, int numVar);
 		void runSimplexAlg();
 		bool isOptimum();
 		bool doSimplexCalc();
